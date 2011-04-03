@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1301690626 source:c:\documents and settings\wildn00b\my documents\gamedev\superguy\main.cpp
+	<SDL/SDL.h>
+	<string>
+
