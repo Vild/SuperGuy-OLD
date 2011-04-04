@@ -32,9 +32,13 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="include\Blocks.h" />
 		<Unit filename="include\Engine.h" />
+		<Unit filename="include\Player.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src\Blocks.cpp" />
 		<Unit filename="src\Engine.cpp" />
+		<Unit filename="src\Player.cpp" />
 		<Unit filename="version.h" />
 		<Extensions>
 			<code_completion />

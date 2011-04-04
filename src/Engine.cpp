@@ -1,9 +1,12 @@
 #include "Engine.h"
 #include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <string>
+#include <iostream>
 
 Engine::Engine()
 {
-    LoadImages();
+    screen = SDL_SetVideoMode(640, 480, 32, SDL_SWSURFACE);
 }
 
 Engine::~Engine()
@@ -11,7 +14,55 @@ Engine::~Engine()
     //dtor
 }
 
-SDL_Surface* Engine::GetCurrentScreen()
+SDL_Surface Engine::*Render()
+{
+    apply_surface(0, 0, RenderBackground(), level)
+    apply_surface(0, 0, RenderLevel(), level);
+    apply_surface(0, 0, RenderPlayer(), level);
+
+    apply_surface(0, 0, level, screen);
+    return screen;
+}
+
+SDL_Surface Engine::*RenderBackground()
+{
+    return load_image("gfx\\splash.png")
+}
+
+SDL_Surface Engine::*RenderLevel()
+{
+    SDL_Surface *tmp = SDL_SetVideoMode(640, 480, 32, SDL_SWSURFACE);
+    for(int x = 0; x > levelX; x++)
+    {
+        for(int y = 0; y > levelY; y++)
+        {
+            switch(curLevel[X][Y])
+            {
+                case 0x01:
+                    apply_surface(x * 16, y * 16, block.Solid(), tmp);
+                case 0x02:
+                    apply_surface(x * 16, y * 16, block.QMarkBox(), tmp);
+            }
+        }
+
+    }
+    return tmp;
+}
+
+SDL_Surface Engine::*RenderPlayer()
+{
+    switch(posPlayer)
+    {
+        case 0:
+            return player.Left();
+        case 1:
+            return player.Right();
+        case 2:
+            return player.Down();
+    }
+}
+
+SDL_Surface Engine::*GetCurrentScreen()
 {
     return Render();
 }
@@ -76,8 +127,11 @@ bool Engine::RemoveEnemy(int ID)
 
 }
 
-bool Engine::LoadLevel(char** level){
-    curLevel = level;}
+bool Engine::LoadLevel(char** level, int XLenght, int YLenght){
+    levelX = XLenght;
+    levelY = YLenght;    curLevel = level;
+    level = SDL_SetVideoMode(levelX * 16, levelY * 16, 32, SDL_SWSURFACE);
+}
 
 void Engine::MovePlayer(Direction direction){    switch(direction)
     {
@@ -90,48 +144,19 @@ void Engine::MovePlayer(Direction direction){    switch(direction)
             pPlayer.y++;
             if(!CheckWallCollision(pPlayer)))
                 pPlayer.y--;
+            posPlayer = 2;
         case LEFT:
             pPlayer.x--;
             if(!CheckWallCollision(pPlayer)))
                 pPlayer.x++;
+            posPlayer = 0;
         case RIGHT:
             pPlayer.x++;
             if(!CheckWallCollision(pPlayer)))
                 pPlayer.x--;
-
+            posPlayer = 1;
     }}
 
-bool Engine::LoadImages(){    player = load_image("gfx\\player.png");
-    blocks = load_image("gfx\\blocks.png");
-
-    rPlayer[0].x = 0;
-    rPlayer[0].y = 0;
-    rPlayer[0].w = 16;
-    rPlayer[0].h = 32;
-
-    rPlayer[1].x = 16;
-    rPlayer[1].y = 0;
-    rPlayer[1].w = 16;
-    rPlayer[1].h = 32;
-
-    rPlayer[2].x = 32;
-    rPlayer[2].y = 0;
-    rPlayer[2].w = 16;
-    rPlayer[2].h = 32;
-
-    rBlocks[0].x = 0;
-    rBlocks[0].y = 0;
-    rBlocks[0].w = 16;
-    rBlocks[0].h = 16;
-
-    rBlocks[1].x = 16;
-    rBlocks[1].y = 0;
-    rBlocks[1].w = 16;
-    rBlocks[1].h = 16;
-
-    pPlayer.x = 50;
-    pPlayer.y = 50;
-}
 
 void Engine::UpdatePlayer(){}
 void Engine::UpdateBlocks(){}

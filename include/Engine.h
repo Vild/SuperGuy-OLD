@@ -1,3 +1,10 @@
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <string>
+#include <iostream>
+#include "Blocks.h"
+#include "Player.h"
+
 #ifndef ENGINE_H
 #define ENGINE_H
 
@@ -8,7 +15,7 @@ class Engine
     public:
         Engine();
         virtual ~Engine();
-        SDL_Surface* GetCurrentScreen();
+        SDL_Surface *GetCurrentScreen();
         bool CheckCollision(SDL_Rect A, SDl_Rect B);
         void Update();
 
@@ -18,38 +25,41 @@ class Engine
         int AddEnemy(char Type, int X, int Y);
         bool RemoveEnemy(int ID);
 
-        bool LoadLevel(char** level);
+        bool LoadLevel(char** level, int XLenght, int YLenght);
 
         void MovePlayer(Direction direction);
     protected:
     private:
-
-        SDL_Surface *player = NULL;
-        SDL_Surface *blocks = NULL;
         SDL_Surface *coins = NULL;
         SDL_Surface *screen = NULL;
         SDL_Surface *level = NULL;
 
+        Blocks block;
+        Player player;
+
         SDL_Rect rPlayer[3];
         SDL_Rect rBlocks[2];
 
-        SDL_Rect pPlayer;
+        int playerx = 50;
+        int playery = 50;
+
+        int posPlayer = 0;
 
         int score = 0;
         int live = 3;
 
+        int levelX;
+        int levelY;
         char** curLevel;
-
-        bool LoadImages();
 
         void UpdatePlayer();
         void UpdateBlocks();
         void UpdateEnemy();
 
-        SDL_Surface Render();
-        SDL_Surface RenderBackground();
-        SDL_Surface RenderLevel();
-        SDL_Surface RenderPlayer();
+        SDL_Surface *Render();
+        SDL_Surface *RenderBackground();
+        SDL_Surface *RenderLevel();
+        SDL_Surface *RenderPlayer();
 
         bool CheckWallCollision(SDL_Pos obj);
 
