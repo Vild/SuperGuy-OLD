@@ -13,15 +13,14 @@ class Blocks
         Blocks();
         virtual ~Blocks();
 
-        SDL_Surface *Solid();
-        SDL_Surface *QMarkBox();
+        SDL_Surface* Solid();
+        SDL_Surface* QMarkBox();
     protected:
     private:
-        SDL_Surface *load_image(std::string filename)
+        SDL_Surface* load_image(std::string filename);
         void LoadBlocks();
-        void apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL);
+        void apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip);
 
-        SDL_Surface *Blocks = NULL;
+        SDL_Surface *BlocksI;
 };
-
 #endif // BLOCKS_H

@@ -1,4 +1,4 @@
-#include "Player.h"
+#include "include/Player.h"
 
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
@@ -12,10 +12,10 @@ Player::Player()
 
 Player::~Player()
 {
-    SDL_FreeSurface(Player);
+    SDL_FreeSurface(PlayerI);
 }
 
-SDL_Surface Player::*load_image(std::string filename){
+SDL_Surface* Player::load_image(std::string filename){
     //Temporary storage for the image that's loaded
     SDL_Surface* loadedImage = NULL;
 
@@ -51,10 +51,10 @@ SDL_Surface Player::*load_image(std::string filename){
 
 void LoadPlayer()
 {
-    Player = load_image("gfx\\Player.png");
+    PlayerI = load_image("gfx\\Player.png");
 }
 
-SDL_Surface Player::*Left()
+SDL_Surface* Player::Left()
 {
     SDL_Rect tmp;
     tmp.x = 0;
@@ -63,11 +63,11 @@ SDL_Surface Player::*Left()
     tmp.h = 16;
 
     SDL_Surface *playGround = NULL;
-    apply_surface(0, 0, Player, playGround, tmp);
+    apply_surface(0, 0, PlayerI, playGround, &tmp);
     return playGround;
 }
 
-SDL_Surface Player::*Right()
+SDL_Surface* Player::Right()
 {
     SDL_Rect tmp;
     tmp.x = 16;
@@ -76,11 +76,11 @@ SDL_Surface Player::*Right()
     tmp.h = 16;
 
     SDL_Surface *playGround = NULL;
-    apply_surface(0, 0, Player, playGround, tmp);
+    apply_surface(0, 0, PlayerI, playGround, &tmp);
     return playGround;
 }
 
-SDL_Surface Player::*Down()
+SDL_Surface* Player::Down()
 {
     SDL_Rect tmp;
     tmp.x = 16;
@@ -89,7 +89,7 @@ SDL_Surface Player::*Down()
     tmp.h = 16;
 
     SDL_Surface *playGround = NULL;
-    apply_surface(0, 0, Player, playGround, tmp);
+    apply_surface(0, 0, PlayerI, playGround, &tmp);
     return playGround;
 }
 

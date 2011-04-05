@@ -3,3 +3,9 @@
 	<SDL/SDL.h>
 	<string>
 
+1302017217 source:c:\documents and settings\wildn00b\my documents\gamedev\superguy\src\blocks.cpp
+	<SDL/SDL.h>
+	<SDL/SDL_image.h>
+	<string>
+	<iostream>
+

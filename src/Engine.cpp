@@ -1,11 +1,24 @@
-#include "Engine.h"
+#include "include/Engine.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <string>
 #include <iostream>
+#include "include/Player.h"
+#include "include/Blocks.h"
+
+
+
 
 Engine::Engine()
 {
+    playerx = 50;
+    playery = 50;
+
+    posPlayer = 0;
+
+    score = 0;
+    live = 3;
+
     screen = SDL_SetVideoMode(640, 480, 32, SDL_SWSURFACE);
 }
 
@@ -14,9 +27,9 @@ Engine::~Engine()
     //dtor
 }
 
-SDL_Surface Engine::*Render()
+SDL_Surface* Engine::Render()
 {
-    apply_surface(0, 0, RenderBackground(), level)
+    apply_surface(0, 0, RenderBackground(), level);
     apply_surface(0, 0, RenderLevel(), level);
     apply_surface(0, 0, RenderPlayer(), level);
 
@@ -24,19 +37,19 @@ SDL_Surface Engine::*Render()
     return screen;
 }
 
-SDL_Surface Engine::*RenderBackground()
+SDL_Surface* Engine::RenderBackground()
 {
-    return load_image("gfx\\splash.png")
+    return load_image("gfx\\splash.png");
 }
 
-SDL_Surface Engine::*RenderLevel()
+SDL_Surface* Engine::RenderLevel()
 {
     SDL_Surface *tmp = SDL_SetVideoMode(640, 480, 32, SDL_SWSURFACE);
     for(int x = 0; x > levelX; x++)
     {
         for(int y = 0; y > levelY; y++)
         {
-            switch(curLevel[X][Y])
+            switch(curLevel[x][y])
             {
                 case 0x01:
                     apply_surface(x * 16, y * 16, block.Solid(), tmp);
@@ -49,7 +62,7 @@ SDL_Surface Engine::*RenderLevel()
     return tmp;
 }
 
-SDL_Surface Engine::*RenderPlayer()
+SDL_Surface* Engine::RenderPlayer()
 {
     switch(posPlayer)
     {
@@ -62,12 +75,11 @@ SDL_Surface Engine::*RenderPlayer()
     }
 }
 
-SDL_Surface Engine::*GetCurrentScreen()
+SDL_Surface* Engine::GetCurrentScreen()
 {
     return Render();
 }
-
-bool Engine::CheckCollision(SDL_Pos obj1, SDl_Pos obj2)
+bool Engine::CheckCollision(SDL_Rect A, SDL_Rect A)
 {
     //The sides of the rectangles
     int leftA, leftB;
@@ -180,7 +192,7 @@ bool Engine::CheckWallCollision(SDL_Rect A)
     }
 }
 
-SDL_Surface Engine::*load_image(std::string filename){    //Temporary storage for the image that's loaded
+SDL_Surface* Engine::load_image(std::string filename){    //Temporary storage for the image that's loaded
     SDL_Surface* loadedImage = NULL;
 
     //The optimized image that will be used

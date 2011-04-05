@@ -1,4 +1,4 @@
-#include "Blocks.h"
+#include "include/Blocks.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <string>
@@ -11,10 +11,10 @@ Blocks::Blocks()
 
 Blocks::~Blocks()
 {
-    SDL_FreeSurface(Blocks);
+    SDL_FreeSurface(BlocksI);
 }
 
-SDL_Surface Blocks::*load_image(std::string filename){
+SDL_Surface* Blocks::load_image(std::string filename){
     //Temporary storage for the image that's loaded
     SDL_Surface* loadedImage = NULL;
 
@@ -50,10 +50,10 @@ SDL_Surface Blocks::*load_image(std::string filename){
 
 void Blocks::LoadBlocks()
 {
-    Blocks = load_image("gfx\\Blocks.png");
+    BlocksI = load_image("gfx\\Blocks.png");
 }
 
-SDL_Surface Blocks::*Solid()
+SDL_Surface* Blocks::Solid()
 {
     SDL_Rect tmp;
     tmp.x = 0;
@@ -62,11 +62,11 @@ SDL_Surface Blocks::*Solid()
     tmp.h = 16;
 
     SDL_Surface *playGround = NULL;
-    apply_surface(0, 0, Blocks, playGround, tmp);
+    apply_surface(0, 0, BlocksI, playGround, &tmp);
     return playGround;
 }
 
-SDL_Surface Blocks::*QMarkBox()
+SDL_Surface* Blocks::QMarkBox()
 {
     SDL_Rect tmp;
     tmp.x = 16;
@@ -75,7 +75,7 @@ SDL_Surface Blocks::*QMarkBox()
     tmp.h = 16;
 
     SDL_Surface *playGround = NULL;
-    apply_surface(0, 0, Blocks, playGround, tmp);
+    apply_surface(0, 0, BlocksI, playGround, &tmp);
     return playGround;
 }
 
