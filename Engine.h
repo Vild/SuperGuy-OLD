@@ -2,8 +2,8 @@
 #include <SDL/SDL_image.h>
 #include <string>
 #include <iostream>
-#include "include/Blocks.h"
-#include "include/Player.h"
+#include "Blocks.h"
+#include "Player.h"
 
 #ifndef ENGINE_H
 #define ENGINE_H
@@ -25,14 +25,14 @@ class Engine
         int AddEnemy(char Type, int X, int Y);
         bool RemoveEnemy(int ID);
 
-        bool LoadLevel(char** level, int XLenght, int YLenght);
+        bool LoadWorld(char** world, int XLenght, int YLenght);
 
         void MovePlayer(Direction direction);
     protected:
     private:
         SDL_Surface *coins;
         SDL_Surface *screen;
-        SDL_Surface *level;
+        SDL_Surface *world;
 
         Blocks block;
         Player player;
@@ -40,17 +40,16 @@ class Engine
         SDL_Rect rPlayer[3];
         SDL_Rect rBlocks[2];
 
-        int playerx;
-        int playery;
+        SDL_Rect pPlayer;
 
         int posPlayer;
 
         int score;
         int live;
 
-        int levelX;
-        int levelY;
-        char** curLevel;
+        int worldX;
+        int worldY;
+        char** curWorld;
 
         void UpdatePlayer();
         void UpdateBlocks();
@@ -58,13 +57,11 @@ class Engine
 
         SDL_Surface* Render();
         SDL_Surface* RenderBackground();
-        SDL_Surface* RenderLevel();
+        SDL_Surface* RenderWorld();
         SDL_Surface* RenderPlayer();
 
         bool CheckWallCollision(SDL_Rect obj);
-
-        SDL_Surface* load_image(std::string filename);
-        void apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL);
+;
 };
 
 #endif // ENGINE_H

@@ -32,13 +32,17 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="include\Blocks.h" />
-		<Unit filename="include\Engine.h" />
-		<Unit filename="include\Player.h" />
+		<Unit filename="Blocks.cpp" />
+		<Unit filename="Blocks.h" />
+		<Unit filename="Engine.cpp" />
+		<Unit filename="Engine.h" />
+		<Unit filename="Load.cpp" />
+		<Unit filename="Load.h" />
+		<Unit filename="Player.cpp" />
+		<Unit filename="Player.h" />
+		<Unit filename="Timer.cpp" />
+		<Unit filename="Timer.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src\Blocks.cpp" />
-		<Unit filename="src\Engine.cpp" />
-		<Unit filename="src\Player.cpp" />
 		<Unit filename="version.h" />
 		<Extensions>
 			<code_completion />

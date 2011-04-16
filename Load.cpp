@@ -1,20 +1,9 @@
-#include "include/Blocks.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <string>
 #include <iostream>
-
-Blocks::Blocks()
+SDL_Surface *load_image(std::string filename)
 {
-    LoadBlocks();
-}
-
-Blocks::~Blocks()
-{
-    SDL_FreeSurface(BlocksI);
-}
-
-SDL_Surface* Blocks::load_image(std::string filename){
     //Temporary storage for the image that's loaded
     SDL_Surface* loadedImage = NULL;
 
@@ -29,6 +18,9 @@ SDL_Surface* Blocks::load_image(std::string filename){
     {
         //Create an optimized image
         optimizedImage = SDL_DisplayFormat(loadedImage);
+
+        if(optimizedImage == NULL)
+            return loadedImage;
 
         //Free the old image
         SDL_FreeSurface(loadedImage);
@@ -48,38 +40,7 @@ SDL_Surface* Blocks::load_image(std::string filename){
     return optimizedImage;
 }
 
-void Blocks::LoadBlocks()
-{
-    BlocksI = load_image("gfx\\Blocks.png");
-}
-
-SDL_Surface* Blocks::Solid()
-{
-    SDL_Rect tmp;
-    tmp.x = 0;
-    tmp.y = 0;
-    tmp.w = 16;
-    tmp.h = 16;
-
-    SDL_Surface *playGround = NULL;
-    apply_surface(0, 0, BlocksI, playGround, &tmp);
-    return playGround;
-}
-
-SDL_Surface* Blocks::QMarkBox()
-{
-    SDL_Rect tmp;
-    tmp.x = 16;
-    tmp.y = 0;
-    tmp.w = 16;
-    tmp.h = 16;
-
-    SDL_Surface *playGround = NULL;
-    apply_surface(0, 0, BlocksI, playGround, &tmp);
-    return playGround;
-}
-
-void Blocks::apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL){    //Holds offsets
+void apply_surface(int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip = NULL){    //Holds offsets
     SDL_Rect offset;
     //Get offsets
     offset.x = x;
