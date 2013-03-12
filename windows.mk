@@ -2,7 +2,7 @@ CC := i486-mingw32-gcc
 CPP := i486-mingw32-g++
 CFLAGS := -Wall -Werror -g `/usr/i486-mingw32/bin/sdl-config --cflags` -std=c11
 CPPFLAGS := -Wall -Werror -g `/usr/i486-mingw32/bin/sdl-config --cflags` -std=c++11
-LFLAGS := `/usr/i486-mingw32/bin/sdl-config --libs` -lm
+LFLAGS := `/usr/i486-mingw32/bin/sdl-config --libs` -lm -lSDL_image
  
 OBJ := obj/windows/
 BIN := bin/windows/
@@ -29,4 +29,4 @@ $(OBJ)%.o: %.cpp
 
 $(TARGET): $(OBJECTS)
 	@mkdir -p $(BIN)
-	$(CPP) $(LFLAGS) $^ -o $@
+	$(CPP) $^ -o $@ $(LFLAGS)
