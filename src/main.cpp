@@ -50,7 +50,7 @@ bool init() {
 
 bool load_splash() {
 	//Load the image
-	splash = load_image("gfx\\splash.png");
+	splash = load_image("gfx/splash.png");
 
 	//If there was an error in loading the immage
 	if (splash == NULL) {
@@ -71,26 +71,25 @@ void clean_up() {
 
 int main(int argc, char* args[]) {
 
+	std::cout << "1" << std::endl;
 	Engine engine;
 	//Make sure the program waits for a quit
 	bool quit = false;
-
+	std::cout << "1" << std::endl;
 	//Initialize
 	if (init() == false)
 		return 1;
-
+	std::cout << "1" << std::endl;
 	//Load the files
 	if (load_splash() == false)
-		return 1;
-
+		return 2;
+	std::cout << "1" << std::endl;
 	//Apply the background to the screen
 	apply_surface(0, 0, splash, screen);
-
+	std::cout << "1" << std::endl;
 	//Update the screen
-	if (SDL_Flip(screen) == -1) {
-		return 1;
-	}
-
+	SDL_Flip(screen);
+	std::cout << "1" << std::endl;
 	const int tmp[32][32] = { { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }, { 0, 0, 0, 0, 0,
 			0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -149,7 +148,7 @@ int main(int argc, char* args[]) {
 					0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 					0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } };
 
-	engine.LoadWorld((char**) &tmp, 32, 32);
+	engine.LoadWorld((char **) tmp, 32, 32);
 
 	update.start();
 	fps.start();
@@ -191,8 +190,7 @@ int main(int argc, char* args[]) {
 
 		//Update Screen
 		apply_surface(0, 0, engine.GetCurrentScreen(), screen);
-		if (SDL_Flip(screen) == -1)
-			return 1;
+		SDL_Flip(screen);
 		frame++;
 		//If a second has passed since the caption was last updated
 		if (update.get_ticks() > 1000) {

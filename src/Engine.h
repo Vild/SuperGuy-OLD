@@ -35,8 +35,8 @@ private:
 	SDL_Surface *screen;
 	SDL_Surface *world;
 
-	Blocks block;
-	Player player;
+	Blocks *block;
+	Player *player;
 
 	SDL_Rect rPlayer[3];
 	SDL_Rect rBlocks[2];

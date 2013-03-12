@@ -14,7 +14,7 @@ Blocks::~Blocks() {
 }
 
 void Blocks::LoadBlocks() {
-	BlocksI = load_image("gfx\\Blocks.bmp");
+	BlocksI = load_image("gfx/Blocks.png");
 }
 
 SDL_Surface* Blocks::Solid() {

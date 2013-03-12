@@ -19,7 +19,7 @@ Player::~Player()
 
 void Player::LoadPlayer()
 {
-    PlayerI = load_image("gfx\\Player.bmp");
+    PlayerI = load_image("gfx/Player.bmp");
 }
 
 SDL_Surface* Player::Left()
